@@ -1,25 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Job;
-
-Route::get('/', function () {
-    return view('home');
-});
-
-Route::get('/jobs', function () {
-    return view('jobs', ['jobs' => Job::all()]);
-});
-
-Route::get('/job/{id}', function ($id) {
-    return view('job', ['job' => Job::find($id)]);
-});
-
-Route::get('/about', function () {
-    return view('about');
-});
 
 
-Route::get('/contact', function () {
-    return view('contact');
-});
+Route::view('/', 'home');
+
+//Route::controller(\App\Http\Controllers\JobController::class)->group(function () {
+//    Route::get('/jobs', 'index');
+//    Route::get('/job/create', 'create');
+//    Route::get('/job/{job}/show', 'show');
+//    Route::post('/job', 'store');
+//    Route::get('/job/{job}/edit', 'edit');
+//    Route::patch('/job/{job}/', 'update');
+//    Route::delete('/job/{job}', 'destroy');
+//});
+
+Route::resource('jobs', \App\Http\Controllers\JobController::class);
+
+Route::view('/about', 'about');
+Route::view('/contact', 'contact');
