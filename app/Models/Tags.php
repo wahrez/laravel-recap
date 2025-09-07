@@ -6,6 +6,9 @@ use Database\Factories\TagsFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @mixin IdeHelperTags
+ */
 class Tags extends Model
 {
     /** @use HasFactory<TagsFactory> */

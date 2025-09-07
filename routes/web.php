@@ -1,21 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\SessionController;
+use App\Http\Controllers\RegisteredUserController;
 
 
 Route::view('/', 'home');
-
-//Route::controller(\App\Http\Controllers\JobController::class)->group(function () {
-//    Route::get('/jobs', 'index');
-//    Route::get('/job/create', 'create');
-//    Route::get('/job/{job}/show', 'show');
-//    Route::post('/job', 'store');
-//    Route::get('/job/{job}/edit', 'edit');
-//    Route::patch('/job/{job}/', 'update');
-//    Route::delete('/job/{job}', 'destroy');
-//});
-
-Route::resource('jobs', \App\Http\Controllers\JobController::class);
-
+Route::resource('jobs', JobController::class);
 Route::view('/about', 'about');
 Route::view('/contact', 'contact');
+
+Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+Route::post('register', [RegisteredUserController::class, 'store'])->name('store');
+
+Route::get('/login', [SessionController::class, 'create'])->name('login');
+Route::post('/login', [SessionController::class, 'store'])->name('store');
+Route::post('/logout', [SessionController::class, 'destroy'])->name('destroy');
